@@ -13,10 +13,11 @@ cache:
     - '$HOME/.gradle'
 
 script: "./gradlew clean build"
+
 services:
   - docker
 
-before_install:
+after_script:
   - docker build -t wnghd94/api:0.0.9 ./subprojects/api
   - docker build -t wnghd94/grpc:0.0.9 ./subprojects/grpc
 

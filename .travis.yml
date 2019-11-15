@@ -20,7 +20,9 @@ services:
 after_script:
   - docker build -t wnghd94/api:0.0.9 ./subprojects/api
   - docker build -t wnghd94/grpc:0.0.9 ./subprojects/grpc
-
+  - docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+  - docker push wnghd94/api:0.0.9
+  - docker push wnghd94/grpc:0.0.9
 
 # CI 실행 완료시 메일로 알람
 notifications:

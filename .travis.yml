@@ -13,6 +13,13 @@ cache:
     - '$HOME/.gradle'
 
 script: "./gradlew clean build"
+services:
+  - docker
+
+before_install:
+  - docker build -t wnghd94/api:0.0.9 ./subprojects/api
+  - docker build -t wnghd94/grpc:0.0.9 ./subprojects/grpc
+
 
 # CI 실행 완료시 메일로 알람
 notifications:

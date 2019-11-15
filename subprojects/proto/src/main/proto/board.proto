@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.derek.kotlin.protocol.board";
+option java_outer_classname = "ManagerProto";
+
+package com.derek;
+
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+
+// The greeting service definition.
+service BoardService {
+  rpc GetBoard(GetBoardParams) returns (GetBoardResult) {}
+  rpc SetBoard(SetBoardParams) returns (GetBoardResult) {}
+  rpc GetBoards(GetBoardParams) returns (GetBoardsResult) {}
+}
+
+// object
+message BoardProto {
+  uint64 id = 1;
+  string title = 2;
+  string contents = 3;
+}
+
+////
+// request
+////
+message SetBoardParams {
+  string title = 1;
+  string contents = 2;
+}
+message GetBoardParams {
+   uint64 id = 1;
+
+}
+
+
+////
+// response
+////
+//message GetBoardResult {
+//  uint64 id = 1;
+//  string title = 2;
+//  string contents = 3;
+//}
+message GetBoardsResult{
+    repeated BoardProto boardProto = 1;
+}
+message GetBoardResult{
+    BoardProto boardProto = 1;
+}

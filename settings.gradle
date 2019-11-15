@@ -1,0 +1,9 @@
+rootProject.name = "kotlin"
+
+include("api")
+include("grpc")
+include("proto")
+
+for (project in rootProject.children) {
+    project.projectDir = file("subprojects/${project.name}")
+}

@@ -1,0 +1,44 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.google.protobuf:protobuf-gradle-plugin:0.8.8")
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'com.google.protobuf'
+
+//jar.enabled = true
+bootJar.enabled = true
+bootJar {
+    manifest {
+        mainClassName = 'com.derek.kotlin.grpc.GrpcApplicationKt'
+    }
+}
+
+dependencies {
+
+    compile project(':proto')
+
+    implementation "io.grpc:grpc-protobuf:${grpcVersion}"
+    implementation "com.google.protobuf:protobuf-java-util:${protobufVersion}"
+    implementation "io.grpc:grpc-stub:${grpcVersion}"
+
+    runtimeOnly "io.grpc:grpc-netty-shaded:${grpcVersion}"
+    implementation 'io.github.lognet:grpc-spring-boot-starter:3.3.0'
+    implementation "io.grpc:grpc-core:${grpcVersion}"
+    implementation "io.grpc:grpc-services:${grpcVersion}"
+    implementation "com.zaxxer:HikariCP:3.3.1"
+    implementation ("org.springframework.boot:spring-boot-starter-jdbc") {
+        exclude group: "com.zaxxer", module: "HikariCP"
+    }
+
+    implementation "org.jetbrains.exposed:exposed:${exposedVersion}"
+    implementation "org.jetbrains.exposed:spring-transaction:${exposedVersion}"
+    runtimeOnly "mysql:mysql-connector-java"
+//    testImplementation "io.grpc:grpc-core:${grpcVersion}"
+//    testImplementation "io.grpc:grpc-services:${grpcVersion}"
+    // testImplementation "io.grpc:grpc-testing:${grpcVersion}"
+}

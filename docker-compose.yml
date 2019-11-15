@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.6
+    container_name: mysql
+    restart: always
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./init.sql:/data/application/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: derek
+      MYSQL_DATABASE: kotlin_board
+    ports:
+      - 3306:3306
+#  grpc:
+#    image: grpc
+#    container_name: grpc
+#    restart: always
+#    ports:
+#    - 6565:6565
+#    links:
+#      - db
+#  api:
+#    image: api
+#    container_name: api
+#    restart: always
+#    ports:
+#      - 8080:8080
+#    links:
+#      - grpc
+#  front:
+#    image: front:0.0.3
+#    container_name: front
+#    restart: always
+#    ports:
+#      - 8081:8081
+#    links:
+#      - api

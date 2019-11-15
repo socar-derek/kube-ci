@@ -1,0 +1,7 @@
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.100.84.90:3306/kotlin_board?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: derek
